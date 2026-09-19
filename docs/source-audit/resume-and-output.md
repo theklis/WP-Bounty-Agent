@@ -5,7 +5,7 @@ All entry intents verify or reuse the same [safe intake](intake-and-workspace.md
 | Intent | Depth and expected result |
 | --- | --- |
 | **AUDIT / FULL AUDIT** | Broad [audit orchestration](audit-orchestration.md) across major scoped functions, a challenged candidate queue, meaningful coverage, and a changed-perspective second pass. |
-| **QUICK TRIAGE** | Confirm source/version; explain purpose, actors, objects, public/low-privilege surfaces, and consequential state/authority transitions; select about 2–5 deep-dive themes, note leads and setup blockers, and recommend whether a full audit is worth time. Label coverage partial; do not imply a full audit, finding, or human test. |
+| **QUICK TRIAGE** | Confirm source/version; use optional [navigation helpers](../../tools/README.md) to speed initial inventory and entry mapping; explain purpose, actors, objects, public/low-privilege surfaces, and consequential state/authority transitions; select about 2–5 deep-dive themes, note leads and setup blockers, and recommend whether a full audit is worth time. Label coverage partial; tool output alone is insufficient and does not imply a full audit, finding, or human test. |
 | **DEEP DIVE** | Focus on a named component, boundary, feature, candidate, or vulnerability family. Read enough adjacent registration, callers, state, and controls to test the path; update the shared model and scoped coverage. |
 | **CHAIN REVIEW** | Start from existing observations/candidates; correlate handlers, requests, actors, tokens, stored state, integrations, and privileged consumers. Evidence every necessary edge and challenge the weakest link. |
 | **SECOND PASS** | Use the existing record and [changed-perspective method](../audit-methodology/coverage-and-review.md). Change attacker lens **and** analytical direction; record assumption challenged, paths added/rejected, and coverage delta. Re-reading the same files with the same lens does not qualify. |
@@ -20,6 +20,8 @@ Keep one overarching `audit.md`. Partition by feature, subsystem, actor/object r
 ## Resume and version control
 
 The audit record's state (`INITIALIZING`, `MODELLING`, `ANALYZING`, `VALIDATION QUEUE`, `SECOND PASS`, `PAUSED`, or `COMPLETE FOR CURRENT SCOPE`) describes workflow progress, not a finding's lifecycle status. On RESUME: locate `audit.md`; compare original input, archive digest or repository commit/dirty state, extracted/source root, and recorded version with the current source; read architecture, selected themes, coverage, linked findings and plans, rejected paths, and last next action. Recheck any premise affected by a changed environment or source. Continue from the highest-value unresolved row, updating the same record. If source identity changed, follow the [version-change rule](intake-and-workspace.md) before using old line references or results.
+
+Reuse generated inventories and indexes only when the recorded archive digest, commit/source state, and a complete helper source digest still match. If the digest is incomplete, verify skipped material and source identity manually. Mark stale navigation data and regenerate after a change; do not carry line references across versions without rechecking source.
 
 ## Progress and honest exit
 

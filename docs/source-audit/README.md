@@ -11,5 +11,6 @@ For `AUDIT <path>`: resolve the exact input, follow [intake and workspace](intak
 | QUICK TRIAGE, focused modes, large targets, resume, and exit | [Modes, resume, and output](resume-and-output.md) |
 | Research phases and reasoning standards | [Core Audit Methodology](../audit-methodology/README.md) |
 | Working record and distinct candidate claims | [Audit record](../../templates/audit-record.md), [finding](../../templates/finding.md), and [validation plan](../../templates/validation-plan.md) |
+| Optional ZIP, identity, inventory, and registration navigation | [Safe helper tooling](../../tools/README.md) |
 
 Read [WordPress knowledge](../../knowledge/wordpress/README.md) when platform semantics affect a premise and [specialist playbooks](../../playbooks/README.md) only for selected themes. Apply the [evidence model](../evidence.md) and [finding lifecycle](../findings.md) throughout. Only explicit human reproduction can make a finding **CONFIRMED**. Give the researcher substantive progress updates at architecture, surface, candidate, coverage, and second-pass checkpoints; distinguish work completed from work planned.

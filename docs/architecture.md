@@ -9,6 +9,7 @@
 | Curated reference | [`knowledge/`](../knowledge/README.md) | Preserve sourced knowledge and reviewed, generalizable lessons. Time-sensitive records carry verification dates. |
 | Specialist method | [`playbooks/`](../playbooks/README.md) | Focused audit procedures, indexed and loaded on demand. |
 | Templates | [`templates/`](../templates/README.md) | Give local records consistent evidence and provenance fields. |
+| Local navigation helpers | [`tools/`](../tools/README.md) | Optional safe ZIP intake, source metadata, inventory, and registration leads; no security judgments. |
 | Per-target work | [`research/`](../research/README.md) | Keep target inputs, working notes, candidate findings, benchmarks, and feedback local by default. |
 
 No runtime service or database is required. Source Audit operates on local files and explicitly chooses relevant methods. Keep source evidence linked to the exact target version or commit; a path and line number alone may become stale.

@@ -11,10 +11,10 @@ Status is about delivered repository capability, not aspiration. Update this fil
 | 5 — Wordfence/CVE intelligence | Dated program and CVE reference process | Complete |
 | 6 — Target Hunter | Sourced target prioritization workflow | Complete |
 | 7 — Source Audit | End-to-end audit workflow | Complete |
-| 8 — Helper tooling | Small justified automation | Planned |
+| 8 — Helper tooling | Small justified automation | Complete |
 | 9 — Learning system | Feedback review and curation workflow | Planned |
 | 10 — Benchmarking | Blind historical evaluation | Planned |
 | 11 — Quality hardening | Reliability and method review | Planned |
 | 12 — Version 1 | Integrated research partner | Planned |
 
-Milestones 1–7 establish the foundation, reference knowledge, core audit method, specialist playbooks, dated current intelligence, Target Hunter, and a Codex-guided Source Audit workflow. Helper tooling, automated learning, and benchmarking remain planned.
+Milestones 1–7 establish the foundation, reference knowledge, core audit method, specialist playbooks, dated current intelligence, Target Hunter, and a Codex-guided Source Audit workflow. Milestone 8 adds optional local navigation helpers. Automated learning and benchmarking remain planned.
