@@ -10,5 +10,7 @@ Copy these into the ignored local `research/` workspace when needed. They define
 - [Current intelligence](intelligence-record.md): dated program or CVE facts.
 - [Wordfence scope assessment](wordfence-scope-assessment.md): provisional finding-specific program screen.
 - [CVE relevance assessment](cve-relevance-assessment.md): preliminary CVE and CNA questions.
+- [Target profile](target-profile.md): candidate architecture, research landscape, and audit handoff.
+- [Target hunt summary](target-hunt-summary.md): screened pool, ordered shortlist, and refresh delta.
 
 Delete prompts that do not apply, but do not erase unknown or contradictory premises merely to make a record look complete.

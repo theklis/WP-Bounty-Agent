@@ -6,6 +6,7 @@ Read only what the current task requires. These documents define stable project 
 | --- | --- |
 | Structure and extension points | [Architecture](architecture.md) |
 | Research reasoning and scope | [Research principles](research-principles.md) |
+| Public software discovery and research prioritization | [Target Hunter](target-hunter/README.md) |
 | Source audit phases and records | [Core audit methodology](audit-methodology/README.md) |
 | Specialist investigation for a selected deep-dive theme | [Playbook index](../playbooks/README.md) |
 | Intended workflows | [Operating modes](modes.md) |

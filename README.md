@@ -6,16 +6,17 @@
 
 Start with a permitted public source tree or local test target. Understand the plugin's purpose, actors, data objects, and trust boundaries. Map reachable features, trace complete paths through code and state, and write evidence-backed hypotheses with explicit missing proof and ways to falsify them. A human researcher reproduces and assesses impact before any finding becomes **CONFIRMED**. Confirmed and rejected results may later become reviewed, reusable lessons.
 
-The planned modes are [TARGET HUNT, AUDIT, DEEP DIVE, CHAIN REVIEW, SECOND PASS, BENCHMARK, and LEARN FROM RESULT](docs/modes.md). They are descriptions of future workflows, not available commands. Source understanding and plugin-specific business logic take priority over generic vulnerability checklists. The repository will retain inspectable methodology and knowledge; it does not retrain an AI model.
+The [TARGET HUNT workflow](docs/target-hunter/README.md) is available as a Codex-guided research method. [AUDIT, DEEP DIVE, CHAIN REVIEW, SECOND PASS, BENCHMARK, and LEARN FROM RESULT](docs/modes.md) remain future workflows; there is no CLI command. Source understanding and plugin-specific business logic take priority over generic vulnerability checklists. The repository retains inspectable methodology and knowledge; it does not retrain an AI model.
 
 ## Current status
 
-**Milestone 1 — Foundation** provides documentation, lifecycle and evidence models, templates, and protected local workspace conventions. **Milestone 2 — WordPress security knowledge** adds a [selectively loaded, source-backed reference](knowledge/wordpress/README.md) for security reasoning. **Milestone 3 — Core audit methodology** defines [the repeatable source-review method](docs/audit-methodology/README.md) and local records. **Milestone 4 — Specialist vulnerability playbooks** adds [on-demand research procedures](playbooks/README.md) for selected security themes. **Milestone 5 — Wordfence and CVE intelligence** adds [dated, recheckable program guidance](knowledge/README.md). There is no scanner, target hunter, source-audit engine, benchmark runner, integration, or automatic learning mechanism yet. See the [roadmap](docs/roadmap.md) for later milestones.
+**Milestone 1 — Foundation** provides documentation, lifecycle and evidence models, templates, and protected local workspace conventions. **Milestone 2 — WordPress security knowledge** adds a [selectively loaded, source-backed reference](knowledge/wordpress/README.md) for security reasoning. **Milestone 3 — Core audit methodology** defines [the repeatable source-review method](docs/audit-methodology/README.md) and local records. **Milestone 4 — Specialist vulnerability playbooks** adds [on-demand research procedures](playbooks/README.md) for selected security themes. **Milestone 5 — Wordfence and CVE intelligence** adds [dated, recheckable program guidance](knowledge/README.md). **Milestone 6 — Target Hunter** adds an evidence-backed target-selection workflow. There is no scanner, automated hunter, source-audit engine, benchmark runner, integration, or automatic learning mechanism yet. See the [roadmap](docs/roadmap.md) for later milestones.
 
-## Future usage examples
+## Example requests
 
-These illustrate intended requests to a future Codex session; no CLI is implemented:
+TARGET HUNT can be used now with live research; the other examples describe future workflows. No CLI is implemented:
 
+- “Find a short list of current Wordfence research targets with architectural theses and explain which deserves audit time first.”
 - “Audit this locally supplied plugin source tree; start by explaining its actors, objects, and trust boundaries.”
 - “Deep dive into the REST endpoints and trace object-level authorization.”
 - “Review these two candidate paths for a multi-request attack chain.”

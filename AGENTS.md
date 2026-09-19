@@ -12,7 +12,7 @@ This repository is the foundation for an AI-assisted WordPress vulnerability res
 ## Route by task
 
 - Research behavior and boundaries: [principles](docs/research-principles.md).
-- TARGET HUNT, AUDIT, DEEP DIVE, CHAIN REVIEW, SECOND PASS, BENCHMARK, or LEARN FROM RESULT: [mode definitions](docs/modes.md). These are future workflows, not implemented commands.
+- TARGET HUNT: [Target Hunter](docs/target-hunter/README.md) and [mode definitions](docs/modes.md). Other modes remain future workflows, not implemented commands.
 - Source review in AUDIT, DEEP DIVE, CHAIN REVIEW, or SECOND PASS: [core audit methodology](docs/audit-methodology/README.md).
 - System structure and extension points: [architecture](docs/architecture.md).
 - Reusable lessons or researcher feedback: [learning model](docs/learning.md) and [knowledge index](knowledge/README.md).
