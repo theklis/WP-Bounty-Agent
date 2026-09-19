@@ -5,7 +5,7 @@
 | Layer | Location | Responsibility |
 | --- | --- | --- |
 | Routing | [`AGENTS.md`](../AGENTS.md), [`docs/README.md`](README.md) | Load only task-relevant instructions. |
-| Stable method | `docs/` | Define research principles, modes, lifecycle, evidence, and curation rules. |
+| Stable method | `docs/`, including [core audit methodology](audit-methodology/README.md) | Define research principles, modes, audit reasoning, lifecycle, evidence, and curation rules. |
 | Curated reference | [`knowledge/`](../knowledge/README.md) | Preserve sourced knowledge and reviewed, generalizable lessons. Time-sensitive records carry verification dates. |
 | Specialist method | [`playbooks/`](../playbooks/README.md) | Future focused audit procedures; indexed and loaded on demand. |
 | Templates | [`templates/`](../templates/README.md) | Give local records consistent evidence and provenance fields. |

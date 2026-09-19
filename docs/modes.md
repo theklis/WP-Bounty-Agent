@@ -15,3 +15,5 @@ Before a substantial mode task, establish its working state internally: mode; ta
 | **LEARN FROM RESULT** | Researcher-confirmed outcome or correction → provenance-bearing proposed lesson, reviewed before curation. |
 
 Modes may share records and specialist playbooks. They must not silently change a finding to **CONFIRMED**, treat benchmark ground truth as audit input, or treat program eligibility as permanently known.
+
+The future AUDIT, DEEP DIVE, CHAIN REVIEW, and SECOND PASS workflows should use the [core audit methodology](audit-methodology/README.md). The method is available as documentation; these modes remain unimplemented commands.

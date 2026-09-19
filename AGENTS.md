@@ -5,7 +5,7 @@ This repository is the foundation for an AI-assisted WordPress vulnerability res
 ## Start here
 
 1. Read [the documentation index](docs/README.md), then only the documents relevant to the task.
-2. For any target, first explain what the software does, its actors and objects, and its trust assumptions. Then trace attacker capability → reachable entry point → controlled data → transformations → checks and authorization → sensitive action → observable impact. A chain may cross requests, handlers, files, or stored state.
+2. For any target, first explain what the software does, its actors and objects, and its trust assumptions. Then trace attacker capability → reachable entry point → controlled data → transformations → authentication, authorization, ownership, and request integrity where relevant → sensitive action → observable impact. A chain may cross requests, handlers, files, or stored state.
 3. Keep observations, hypotheses, strong candidates, confirmed vulnerabilities, and rejected hypotheses distinct. Use [the finding lifecycle](docs/findings.md) and [evidence model](docs/evidence.md). Only explicit human validation can make a finding **CONFIRMED**.
 4. Cite exact source locations and versions, name missing evidence, seek counterexamples, and say “unproven” when the chain is incomplete. Never turn suspicious code into a vulnerability claim by assertion.
 
@@ -13,6 +13,7 @@ This repository is the foundation for an AI-assisted WordPress vulnerability res
 
 - Research behavior and boundaries: [principles](docs/research-principles.md).
 - TARGET HUNT, AUDIT, DEEP DIVE, CHAIN REVIEW, SECOND PASS, BENCHMARK, or LEARN FROM RESULT: [mode definitions](docs/modes.md). These are future workflows, not implemented commands.
+- Source review in AUDIT, DEEP DIVE, CHAIN REVIEW, or SECOND PASS: [core audit methodology](docs/audit-methodology/README.md).
 - System structure and extension points: [architecture](docs/architecture.md).
 - Reusable lessons or researcher feedback: [learning model](docs/learning.md) and [knowledge index](knowledge/README.md).
 - Future specialist analysis: [playbook index](playbooks/README.md). Do not load unrelated playbooks.
