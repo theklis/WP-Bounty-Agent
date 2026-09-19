@@ -11,7 +11,7 @@ All entry intents verify or reuse the same [safe intake](intake-and-workspace.md
 | **SECOND PASS** | Use the existing record and [changed-perspective method](../audit-methodology/coverage-and-review.md). Change attacker lens **and** analytical direction; record assumption challenged, paths added/rejected, and coverage delta. Re-reading the same files with the same lens does not qualify. |
 | **RESUME** | Verify the source identity and existing record, read current candidate links and coverage/deferred queue, then continue the next unresolved partition without repeating completed work. |
 
-The full [learning workflow](../learning.md) and BENCHMARK remain later milestones. A human outcome may be recorded under the existing finding lifecycle now; do not auto-curate a lesson.
+For a human outcome after an audit, follow [LEARN FROM RESULT](../learning-workflow.md); do not auto-curate a lesson. BENCHMARK remains a later milestone.
 
 ## Partition large targets without losing the whole
 

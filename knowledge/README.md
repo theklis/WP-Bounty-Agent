@@ -7,8 +7,8 @@ This area is for reviewed, reusable material, not raw target notes. Start with t
 | [WordPress](wordpress/README.md) | Security-relevant platform semantics and selective topic routing | Milestone 2 reference |
 | [Bounty intelligence](bounty/README.md) | Dated Wordfence rules and provisional eligibility assessment | Milestone 5 snapshot; recheck before use |
 | [CVE guidance](cve/README.md) | Dated CVE Program rules, relevance, and CNA scope checks | Milestone 5 snapshot; recheck before use |
-| [Historical cases](cases/README.md) | Sourced case studies and benchmark ground truth | Placeholder |
-| [Research patterns](patterns/README.md) | Reviewed reusable attack/review patterns | Placeholder |
-| [Lessons](lessons/README.md) | Outcome-derived, reviewed lessons | Placeholder |
+| [Historical cases](cases/README.md) | Sanitized, outcome-grounded paths and later benchmark cases | Curated records only; no case published yet |
+| [Research patterns](patterns/README.md) | Bounded, falsifiable cross-target research patterns | Curated records only; no pattern published yet |
+| [Lessons](lessons/README.md) | Outcome-derived operational research guidance | Curated records only; no lesson published yet |
 
-Use [the current-intelligence convention](../docs/current-intelligence.md) for freshness and conflicts, and [the learning model](../docs/learning.md) before promoting a local result. Other categories remain placeholders for later milestones.
+Use [the current-intelligence convention](../docs/current-intelligence.md) for freshness and conflicts, and the [learning workflow](../docs/learning-workflow.md) before promoting a local result. Retrieve curated cases, patterns, and lessons selectively by target architecture, actor/object boundary, selected playbook, or research question. Local proposals are not authoritative guidance. Benchmarking remains a later milestone.

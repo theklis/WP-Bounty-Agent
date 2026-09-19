@@ -12,9 +12,9 @@ Status is about delivered repository capability, not aspiration. Update this fil
 | 6 — Target Hunter | Sourced target prioritization workflow | Complete |
 | 7 — Source Audit | End-to-end audit workflow | Complete |
 | 8 — Helper tooling | Small justified automation | Complete |
-| 9 — Learning system | Feedback review and curation workflow | Planned |
+| 9 — Learning system | Human-grounded feedback review and curation workflow | Complete |
 | 10 — Benchmarking | Blind historical evaluation | Planned |
 | 11 — Quality hardening | Reliability and method review | Planned |
 | 12 — Version 1 | Integrated research partner | Planned |
 
-Milestones 1–7 establish the foundation, reference knowledge, core audit method, specialist playbooks, dated current intelligence, Target Hunter, and a Codex-guided Source Audit workflow. Milestone 8 adds optional local navigation helpers. Automated learning and benchmarking remain planned.
+Milestones 1–7 establish the foundation, reference knowledge, core audit method, specialist playbooks, dated current intelligence, Target Hunter, and a Codex-guided Source Audit workflow. Milestone 8 adds optional local navigation helpers. Milestone 9 adds human-grounded lesson proposals, review gates, and selective curated knowledge routing. BENCHMARK remains Milestone 10; autonomous learning and model retraining are not planned.

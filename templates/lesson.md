@@ -1,19 +1,21 @@
 # Lesson: <short title>
 
-- Origin: `<local finding, benchmark, or researcher feedback reference>`
-- Outcome: `confirmed | rejected | partially correct | correction | missed path`
-- Basis: `verified fact | researcher-provided feedback | inferred pattern | experimental technique`
-- Target/version and evidence provenance: `<local reference or approved public source>`
-- Review state / reviewer / date: `<proposed or curated>`
+- ID / state: `<ID> — PROPOSED | REVIEWED | CURATED | REJECTED | SUPERSEDED`
+- Origin and date: `<audit/finding/case ID or researcher feedback; outcome date>`
+- Target/version and tested conditions: `<exact subject or sanitized description; actor/configuration where material>`
+- Human outcome: `confirmed | rejected | partially correct | correction | missed path | correct no-finding — <what was actually observed>`
+- Basis for each material claim: `verified fact | researcher-provided feedback | inferred pattern | experimental technique — <source/test reference>`
+- Primary destination: `knowledge/cases/ | knowledge/patterns/ | knowledge/lessons/ | local only`
+- Review: `<reviewer, date, decision/remaining condition, explicit approval if curated>`
 
-## What happened
+## Outcome and evidence
 
-State the observation or researcher result, with its tested conditions. For a benchmark, distinguish blind output from later ground truth.
+Compare the original hypothesis or missed question with the human result. Cite a sanitized evidence summary and local or public provenance; name missing facts. For a chain, show the primitives, state/authority bridge, consumer, and final effect or failed premise. For a future benchmark, distinguish blind output from later ground truth.
 
-## Proposed reusable lesson
+## Proposed learning and limits
 
-State the narrow pattern, applicable preconditions, and how it should change research behavior. Identify counterexamples, uncertainty, and where generalization may fail.
+Separate the target-specific fact from the proposed reusable observation, heuristic, or platform claim. State when it applies, what to trace/check, why it mattered, what would disprove the path, known counterexamples, and what must **not** be generalized. Explain why the evidence supports this scope; do not infer safety or vulnerability from one result.
 
-## Curation check
+## Review and change candidates
 
-Record source verification, sensitivity/license review, and any changes made to remove target-specific or confidential detail. Explain why the evidence supports the stated scope. Keep revisions in Git history after promotion.
+Record provenance/source verification, sanitization and license/disclosure review, contrary evidence, destination, and reviewer decision. If useful, propose a `METHODOLOGY CHANGE CANDIDATE` or `PLAYBOOK CHANGE CANDIDATE` with current weakness, supporting outcomes, proposed change, downside, and affected docs; this does not approve those edits. For a superseded lesson, link the conflicting outcome and replacement while preserving history. Keep revisions in Git history after promotion.

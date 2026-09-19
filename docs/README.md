@@ -15,7 +15,8 @@ Read only what the current task requires. These documents define stable project 
 | Status changes and finding contents | [Finding lifecycle](findings.md) |
 | Proof, uncertainty, and confidence | [Evidence model](evidence.md) |
 | Freshness, conflicts, and use of changing program/CVE rules | [Current intelligence](current-intelligence.md) |
-| Feedback and durable lessons | [Learning model](learning.md) |
+| Learning principles and durable knowledge | [Learning model](learning.md) |
+| Researcher outcome, correction, miss, or lesson review | [LEARN FROM RESULT workflow](learning-workflow.md) |
 | File placement and safe Git use | [Repository policy](repository-policy.md) |
 | Delivery status | [Roadmap](roadmap.md) |
 
