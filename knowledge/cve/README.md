@@ -1,3 +1,3 @@
 # CVE guidance
 
-**Future work.** Store sourced, dated guidance on CVE relevance and disclosure processes, with applicability and stale status. Avoid treating changing policy as permanent method. Use [the intelligence template](../../templates/intelligence-record.md). See [the knowledge index](../README.md).
+Use the [dated CVE Program snapshot](snapshot-2026-09-19.md) when a technically meaningful finding needs a preliminary CVE relevance or CNA routing assessment. Recheck the operative rules and partner scopes before a consequential recommendation. The project cannot assign CVE IDs; a human researcher records an actual assignment only from CNA/CVE evidence. Use the [CVE assessment](../../templates/cve-relevance-assessment.md) for a specific finding, and the [intelligence convention](../../docs/current-intelligence.md) and [record template](../../templates/intelligence-record.md) when curating updates. See the [knowledge index](../README.md).

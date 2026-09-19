@@ -10,7 +10,7 @@ The planned modes are [TARGET HUNT, AUDIT, DEEP DIVE, CHAIN REVIEW, SECOND PASS,
 
 ## Current status
 
-**Milestone 1 — Foundation** provides documentation, lifecycle and evidence models, templates, and protected local workspace conventions. **Milestone 2 — WordPress security knowledge** adds a [selectively loaded, source-backed reference](knowledge/wordpress/README.md) for security reasoning. **Milestone 3 — Core audit methodology** defines [the repeatable source-review method](docs/audit-methodology/README.md) and local records. **Milestone 4 — Specialist vulnerability playbooks** adds [on-demand research procedures](playbooks/README.md) for selected security themes. There is no scanner, target hunter, source-audit engine, benchmark runner, integration, or automatic learning mechanism yet. See the [roadmap](docs/roadmap.md) for later milestones.
+**Milestone 1 — Foundation** provides documentation, lifecycle and evidence models, templates, and protected local workspace conventions. **Milestone 2 — WordPress security knowledge** adds a [selectively loaded, source-backed reference](knowledge/wordpress/README.md) for security reasoning. **Milestone 3 — Core audit methodology** defines [the repeatable source-review method](docs/audit-methodology/README.md) and local records. **Milestone 4 — Specialist vulnerability playbooks** adds [on-demand research procedures](playbooks/README.md) for selected security themes. **Milestone 5 — Wordfence and CVE intelligence** adds [dated, recheckable program guidance](knowledge/README.md). There is no scanner, target hunter, source-audit engine, benchmark runner, integration, or automatic learning mechanism yet. See the [roadmap](docs/roadmap.md) for later milestones.
 
 ## Future usage examples
 

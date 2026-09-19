@@ -16,6 +16,7 @@ This repository is the foundation for an AI-assisted WordPress vulnerability res
 - Source review in AUDIT, DEEP DIVE, CHAIN REVIEW, or SECOND PASS: [core audit methodology](docs/audit-methodology/README.md).
 - System structure and extension points: [architecture](docs/architecture.md).
 - Reusable lessons or researcher feedback: [learning model](docs/learning.md) and [knowledge index](knowledge/README.md).
+- Current Wordfence scope or CVE relevance: [bounty intelligence](knowledge/bounty/README.md) or [CVE guidance](knowledge/cve/README.md); recheck before consequential decisions.
 - Specialist analysis: [playbook index](playbooks/README.md). Do not load unrelated playbooks.
 - File placement, curation, and secrets: [repository policy](docs/repository-policy.md) and [local research workspace](research/README.md).
 - Project status: [roadmap](docs/roadmap.md).
