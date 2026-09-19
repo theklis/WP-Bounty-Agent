@@ -5,13 +5,13 @@
 | Layer | Location | Responsibility |
 | --- | --- | --- |
 | Routing | [`AGENTS.md`](../AGENTS.md), [`docs/README.md`](README.md) | Load only task-relevant instructions. |
-| Stable method | `docs/`, including [core audit methodology](audit-methodology/README.md) | Define research principles, modes, audit reasoning, lifecycle, evidence, and curation rules. |
+| Stable method | `docs/`, including [core audit methodology](audit-methodology/README.md) and [Source Audit workflow](source-audit/README.md) | Define research principles, modes, audit reasoning and operation, lifecycle, evidence, and curation rules. |
 | Curated reference | [`knowledge/`](../knowledge/README.md) | Preserve sourced knowledge and reviewed, generalizable lessons. Time-sensitive records carry verification dates. |
 | Specialist method | [`playbooks/`](../playbooks/README.md) | Focused audit procedures, indexed and loaded on demand. |
 | Templates | [`templates/`](../templates/README.md) | Give local records consistent evidence and provenance fields. |
 | Per-target work | [`research/`](../research/README.md) | Keep target inputs, working notes, candidate findings, benchmarks, and feedback local by default. |
 
-No runtime service or database is part of this milestone. A future workflow can operate on local files and explicitly choose relevant methods. Keep source evidence linked to the exact target version or commit; a path and line number alone may become stale.
+No runtime service or database is required. Source Audit operates on local files and explicitly chooses relevant methods. Keep source evidence linked to the exact target version or commit; a path and line number alone may become stale.
 
 ## Information flow
 

@@ -5,7 +5,10 @@ Use only sections relevant to the scope. Fill this in ignored `research/`; do no
 ## Preflight and security model
 
 - Mode and research question: `<...>`
-- Source origin and exact target version/commit: `<...>`
+- Audit state, last reviewed, and next action: `<...>`
+- Supplied input and source identity: `<original path/type, archive digest or repository ref/dirty state, extracted root, exact version/commit>`
+- Source provenance, completeness, and conflicting metadata: `<...>`
+- Target Hunter handoff/lead IDs and verified version match, if any: `<...>`
 - Plugin/theme, dependencies and tested environment: `<...>`
 - Authorization, scope, exclusions, workspace, knowledge consulted: `<...>`
 - Unresolved setup assumptions: `<...>`
@@ -50,11 +53,19 @@ Link cross-file or cross-request paths and finding IDs here. For each necessary 
 | --- | --- | --- | --- |
 |  |  |  |  |
 
+## Candidate and validation queue
+
+Link distinct [finding records](finding.md); group routes with the same root issue. This table is a resume and testing queue, not a second evidence ledger.
+
+| Finding ID / status | Confidence, priority, and reason | Weakest unresolved premise | Next human verification / plan |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
 ## Second pass and final research summary
 
 - New attacker and analytical perspectives; first-pass assumption challenged: `<...>`
 - Paths revisited, new checks or surfaces, candidate and coverage changes: `<...>`
-- Candidate IDs/statuses and human validation needs: `<...>`
+- Queue disposition and human validation needs: `<...>`
 - Rejected paths and their specific counterevidence: `<...>`
 - Important blind spots, deferred areas, and exclusions: `<...>`
 - Conclusion limited to reviewed paths and conditions: `<...>`
