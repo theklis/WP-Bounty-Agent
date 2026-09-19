@@ -1,0 +1,17 @@
+# Authorization and object isolation
+
+## Boundary and target-derived rule
+
+Load this when an actor can choose, discover, or indirectly influence an object, user, tenant, vendor/store, or site. Authentication identifies the actor; an action-level capability may permit a class of operations; this playbook asks whether **that actor may perform this operation on this exact resolved object**. Derive a rule of the form “actor with relationship R may do action A to object O in state S,” then compare create, read, update, delete, bulk, export, and download separately. Guest, Subscriber/customer, legitimate owner of one object, staff, shop manager, and tenant/site member can have different relationships; WordPress roles alone need not describe plugin authority.
+
+## Trace the selected object
+
+Start at the reachable route, AJAX/admin-post handler, form, shortcode, background job, or export. Track request IDs, user/post/booking/order/submission IDs, API-key owners, secondary-property lookups, and server-side state that stores attacker-selected objects. Follow transformations and the *final* object used by the read or write. Locate the action permission and relationship check, including custom tables, post authorship, assignments, tenant IDs, site context, and token grants. Ask whether a check protects object A while a later lookup, bulk iteration, callback, or second request acts on B. For create, ask who may set initial owner/tenant; for read/export, ask whose data the response includes; for mutation, ask which state changes become possible.
+
+Treat horizontal access, vertical privilege, and cross-site/tenant isolation as distinct hypotheses. A global option, shared cache, or custom-table query may omit a tenant key even when endpoint checks appear scoped. For collections and exports, check whether *every returned item* obeys the relationship rule; authorizing one parent or selected ID may not authorize children or a bulk result. Follow owner or status changes after the first authorization decision. A low-impact read can disclose a token or secret later accepted by a write handler; use [chaining](chaining.md) only when both transitions have evidence.
+
+## Disproof and local validation
+
+Identifier predictability is neither required nor sufficient for an authorization flaw. An opaque ID is not automatically an access control; a predictable ID is harmless if the exact operation is correctly authorized. Seek object-aware meta capabilities, explicit relationship joins, lookup filters, later checks, endpoint registration restrictions, and status constraints. A nonce does not settle ownership. Before calling a path strong, establish reachability, attacker control of the selected object, the applicable rule, the missed or misapplied check, and an observable cross-boundary effect.
+
+In an authorized local test, create two accounts with comparable roles and separate objects. Compare own-object success with other-object denial across read, update, bulk, and export paths; include a site/tenant change if supported. Record the precise object resolved and any earlier check. Platform semantics: [identity/capabilities](../knowledge/wordpress/identity-and-capabilities.md), [ownership/multisite](../knowledge/wordpress/ownership-and-plugin-models.md), and the relevant [REST](../knowledge/wordpress/rest-api.md) or [AJAX](../knowledge/wordpress/ajax-and-admin-post.md) dispatcher.

@@ -10,7 +10,7 @@ The planned modes are [TARGET HUNT, AUDIT, DEEP DIVE, CHAIN REVIEW, SECOND PASS,
 
 ## Current status
 
-**Milestone 1 — Foundation** provides documentation, lifecycle and evidence models, templates, and protected local workspace conventions. **Milestone 2 — WordPress security knowledge** adds a [selectively loaded, source-backed reference](knowledge/wordpress/README.md) for security reasoning. **Milestone 3 — Core audit methodology** defines [the repeatable source-review method](docs/audit-methodology/README.md) and local records. There is no scanner, target hunter, source-audit engine, benchmark runner, integration, or automatic learning mechanism yet. See the [roadmap](docs/roadmap.md) for later milestones.
+**Milestone 1 — Foundation** provides documentation, lifecycle and evidence models, templates, and protected local workspace conventions. **Milestone 2 — WordPress security knowledge** adds a [selectively loaded, source-backed reference](knowledge/wordpress/README.md) for security reasoning. **Milestone 3 — Core audit methodology** defines [the repeatable source-review method](docs/audit-methodology/README.md) and local records. **Milestone 4 — Specialist vulnerability playbooks** adds [on-demand research procedures](playbooks/README.md) for selected security themes. There is no scanner, target hunter, source-audit engine, benchmark runner, integration, or automatic learning mechanism yet. See the [roadmap](docs/roadmap.md) for later milestones.
 
 ## Future usage examples
 
@@ -23,4 +23,4 @@ These illustrate intended requests to a future Codex session; no CLI is implemen
 
 ## Navigate
 
-Read the [documentation index](docs/README.md) for the smallest relevant set of instructions. [Knowledge](knowledge/README.md) holds curated reference material; [playbooks](playbooks/README.md) will hold specialist methods; [research](research/README.md) is a local, ignored workspace. Repository safety and curation rules are in the [repository policy](docs/repository-policy.md).
+Read the [documentation index](docs/README.md) for the smallest relevant set of instructions. [Knowledge](knowledge/README.md) holds curated reference material; [playbooks](playbooks/README.md) hold specialist methods; [research](research/README.md) is a local, ignored workspace. Repository safety and curation rules are in the [repository policy](docs/repository-policy.md).

@@ -7,6 +7,7 @@ Read only what the current task requires. These documents define stable project 
 | Structure and extension points | [Architecture](architecture.md) |
 | Research reasoning and scope | [Research principles](research-principles.md) |
 | Source audit phases and records | [Core audit methodology](audit-methodology/README.md) |
+| Specialist investigation for a selected deep-dive theme | [Playbook index](../playbooks/README.md) |
 | Intended workflows | [Operating modes](modes.md) |
 | Status changes and finding contents | [Finding lifecycle](findings.md) |
 | Proof, uncertainty, and confidence | [Evidence model](evidence.md) |
