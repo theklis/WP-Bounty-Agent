@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import stat
 import sys
 from pathlib import Path
 
@@ -26,7 +27,7 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Read-only Source Audit navigation helper; never a vulnerability scanner")
     parser.add_argument("--version", action="version", version=VERSION)
     parser.add_argument("--format", choices=("markdown", "json"), default="markdown")
-    parser.add_argument("--output", type=Path, help="new artifact inside repository research/audits/ (default: stdout)")
+    parser.add_argument("--output", type=Path, help="new artifact inside research/audits/<audit>/indexes/ (default: stdout)")
     sub = parser.add_subparsers(dest="command", required=True)
     for command in ("inspect-zip", "extract-zip", "identify", "inventory", "entrypoints", "survey"):
         child = sub.add_parser(command)
@@ -56,23 +57,28 @@ def _markdown(payload: dict) -> str:
         lines.append("\nFull member names and limits are available with `--format json`.")
     elif command == "identify":
         lines += [f"- Source: `{data['source_root']}`", f"- Status: {data['status']}",
-                  f"- Version conflict: {data['version_conflict']}"]
+                  f"- Observed version conflict: {data['version_conflict']} (available clues only)"]
         for item in data["candidates"]:
             label = "Plugin Name" if item["kind"] == "plugin" else "Theme Name"
             lines.append(f"- {item['kind']}: {item['fields'][label]['value']} ({item['file']}:{item['fields'][label]['line']})")
         for item in data["versions"]: lines.append(f"- Version clue: {item['value']} ({item['evidence']})")
         if data["git"]: lines.append(f"- Git: {data['git']}")
+        else: lines.append("- Git: unavailable or source is not a repository root; commit/dirty state unknown")
+        lines.append(f"- Skipped/limited paths: {len(data['skipped'])}; see JSON for reasons")
         lines.append(f"\n{data['note']}")
     elif command == "inventory":
         lines += [f"- Source: `{data['source_root']}`", f"- Source digest: `{data['source_digest']}` (complete: {data['digest_complete']})",
                   f"- Files: {data['total_files']}; PHP LOC approximate: {data['php_loc_approx']}",
                   f"- File types: {data['file_types']}", f"- Top level: {data['top_level']}",
                   f"- Additional file types/top-level groups: {data['other_file_type_count']}/{data['other_top_level_count']}",
-                  f"- Composer: {data['composer_present']}; vendor: {data['vendor_present']}"]
+                  f"- Composer: {data['composer_present']}; vendor: {data['vendor_present']}",
+                  f"- Skipped/limited paths: {len(data['skipped'])}; see JSON for reasons"]
         for label, hint in data["path_hints"].items(): lines.append(f"- {label}: {hint['count']} path matches; examples: {', '.join(hint['examples'])}")
         lines.append(f"\n{data['note']}")
     elif command == "entrypoints":
         lines += [f"- Source: `{data['source_root']}`", f"- Source digest: `{data['source_digest']}` (complete: {data['digest_complete']})",
+                  f"- PHP text scan complete: {data['php_text_scan_complete']} (recognizable static forms only)",
+                  f"- Skipped/limited paths: {len(data['skipped'])}; see JSON for reasons",
                   f"- Registration leads: {len(data['entries'])}", "", "| Category | Registration | File:line | Callback |", "|---|---|---|---|"]
         for item in data["entries"][:200]:
             display = (item["hook_or_route"] or item["registration"] or "dynamic").replace("|", "\\|")
@@ -81,30 +87,54 @@ def _markdown(payload: dict) -> str:
         lines.append(f"\n{data['limitations']}")
     elif command == "survey":
         lines += [f"- Source: `{data['identity']['source_root']}`", f"- Identity status: {data['identity']['status']}",
-                  f"- Source digest: `{data['inventory']['source_digest']}`", f"- Files: {data['inventory']['total_files']}",
+                  f"- Source digest: `{data['inventory']['source_digest']}` (complete: {data['inventory']['digest_complete']})",
+                  f"- PHP text scan complete: {data['entrypoints']['php_text_scan_complete']} (recognizable static forms only)",
                   f"- Registration leads: {len(data['entrypoints']['entries'])}",
                   "", "Use individual commands or JSON for evidence and full navigation records."]
     return "\n".join(lines) + "\n"
 
 
-def _write_output(path: Path, content: str) -> None:
+def _ordinary_directory(path: Path) -> None:
+    info = path.lstat()
+    if (not stat.S_ISDIR(info.st_mode) or stat.S_ISLNK(info.st_mode)
+            or getattr(info, "st_file_attributes", 0) & 0x400):
+        raise ValueError(f"directory must be ordinary, not a symlink/reparse point: {path}")
+
+
+def _audits_root() -> Path:
     repo = Path(__file__).resolve().parent.parent
-    allowed = (repo / "research" / "audits").resolve(strict=False)
-    destination = path.expanduser().resolve(strict=False)
-    if not destination.is_relative_to(allowed) or destination == allowed:
-        raise ValueError("output must be a new file under repository research/audits/")
-    parent = destination.parent
-    if not parent.is_dir() or parent.is_symlink():
-        raise ValueError("output parent must be an existing ordinary audit workspace directory")
-    with destination.open("x", encoding="utf-8", newline="\n") as handle:
+    research = repo / "research"
+    audits = research / "audits"
+    for directory in (research, audits):
+        _ordinary_directory(directory)
+    return audits.resolve(strict=True)
+
+
+def _write_output(path: Path, content: str) -> None:
+    allowed = _audits_root()
+    requested = path.expanduser()
+    if not requested.is_absolute():
+        requested = Path.cwd() / requested
+    if not requested.is_relative_to(allowed):
+        raise ValueError("output must be a new file under repository research/audits/<audit>/indexes/")
+    relative = requested.relative_to(allowed)
+    if len(relative.parts) != 3 or relative.parts[1] != "indexes" or ".." in relative.parts:
+        raise ValueError("output must be a new file under repository research/audits/<audit>/indexes/")
+    audit = allowed / relative.parts[0]
+    indexes = audit / "indexes"
+    _ordinary_directory(audit)
+    _ordinary_directory(indexes)
+    destination = requested.resolve(strict=False)
+    if destination.parent != indexes.resolve(strict=True):
+        raise ValueError("output must remain inside the selected audit's indexes directory")
+    with requested.open("x", encoding="utf-8", newline="\n") as handle:
         handle.write(content)
 
 
 def _check_audit_workspace(path: Path) -> None:
-    repo = Path(__file__).resolve().parent.parent
-    allowed = (repo / "research" / "audits").resolve(strict=False)
+    allowed = _audits_root()
     destination = path.expanduser().resolve(strict=True)
-    if not destination.is_relative_to(allowed) or destination == allowed:
+    if not destination.is_relative_to(allowed) or len(destination.relative_to(allowed).parts) != 1:
         raise ValueError("extraction workspace must be under repository research/audits/<audit>/")
 
 

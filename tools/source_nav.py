@@ -23,6 +23,7 @@ ACTION_SCHEDULER_HOOK_INDEX = {
     "as_schedule_recurring_action": 2,
     "as_schedule_cron_action": 2,
 }
+HEREDOC_OPEN = re.compile(r'''<<<[ \t]*(?:'([A-Za-z_]\w*)'|"([A-Za-z_]\w*)"|([A-Za-z_]\w*))[ \t]*\r?\n''')
 
 
 def _linkish(path: Path) -> bool:
@@ -72,15 +73,15 @@ def _walk(root: Path):
     return files, sorted(skipped)
 
 
-def _read(path: Path, limit: int = MAX_TEXT) -> tuple[str | None, str | None]:
+def _read(path: Path, limit: int = MAX_TEXT, *, prefix: bool = False) -> tuple[str | None, str | None]:
     try:
         if _linkish(path):
             return None, "symlink/reparse point"
-        if path.stat().st_size > limit:
+        if not prefix and path.stat().st_size > limit:
             return None, f"exceeds {limit} byte text limit"
         with path.open("rb") as handle:
-            data = handle.read(limit + 1)
-        if len(data) > limit:
+            data = handle.read(limit if prefix else limit + 1)
+        if not prefix and len(data) > limit:
             return None, f"exceeds {limit} byte text limit"
         if b"\x00" in data:
             return None, "binary/NUL bytes"
@@ -98,15 +99,17 @@ def _header(text: str, label: str) -> dict:
     return values if label in values else {}
 
 
-def _metadata_candidates(root: Path, files):
+def _metadata_candidates(root: Path, files, skipped: list[str] | None = None):
     candidates = []
     for rel, path, _ in files:
         if "/" in rel:
             continue
         if path.suffix.lower() != ".php" and rel.lower() != "style.css":
             continue
-        content, _ = _read(path, 16384)
+        content, reason = _read(path, 16384, prefix=True)
         if content is None:
+            if skipped is not None:
+                skipped.append(f"{rel}: header unavailable ({reason})")
             continue
         kind = "theme" if rel.lower() == "style.css" else "plugin"
         fields = _header(content, "Theme Name" if kind == "theme" else "Plugin Name")
@@ -118,21 +121,32 @@ def _metadata_candidates(root: Path, files):
 def likely_roots(source: Path) -> dict:
     root = _root(source)
     found = []
+    skipped = []
     pending = [(root, 0)]
     while pending:
         directory, depth = pending.pop(0)
         try:
             entries = sorted(directory.iterdir(), key=lambda p: (p.name.casefold(), p.name))
-        except OSError:
+        except OSError as exc:
+            skipped.append(f"{directory.relative_to(root).as_posix()}: unreadable directory ({type(exc).__name__})")
             continue
-        files = [(p.name, p, p.stat().st_size) for p in entries if not _linkish(p) and p.is_file()]
-        for candidate in _metadata_candidates(directory, files):
+        files = []
+        for path in entries:
+            try:
+                if _linkish(path):
+                    skipped.append(f"{path.relative_to(root).as_posix()}: symlink/reparse point")
+                elif path.is_file():
+                    files.append((path.name, path, path.stat().st_size))
+                elif depth < 3 and path.is_dir() and path.name not in SKIP_DIRS:
+                    pending.append((path, depth + 1))
+            except OSError as exc:
+                skipped.append(f"{path.relative_to(root).as_posix()}: unreadable ({type(exc).__name__})")
+        for candidate in _metadata_candidates(directory, files, skipped):
             found.append({"root": directory.relative_to(root).as_posix(), "kind": candidate["kind"],
                           "evidence": f"{candidate['file']}:{candidate['fields']['Theme Name' if candidate['kind'] == 'theme' else 'Plugin Name']['line']}"})
-        if depth < 3:
-            pending.extend((p, depth + 1) for p in entries if not _linkish(p) and p.is_dir() and p.name not in SKIP_DIRS)
     found.sort(key=lambda x: (x["root"], x["evidence"]))
-    return {"status": "single" if len(found) == 1 else "none" if not found else "ambiguous", "candidates": found}
+    return {"status": "incomplete" if skipped else "single" if len(found) == 1 else "none" if not found else "ambiguous",
+            "candidates": found, "skipped": sorted(skipped)}
 
 
 def _git(root: Path) -> dict | None:
@@ -151,7 +165,12 @@ def _git(root: Path) -> dict | None:
 def identify(source: Path) -> dict:
     root = _root(source)
     files, skipped = _walk(root)
-    candidates = _metadata_candidates(root, files)
+    candidates = _metadata_candidates(root, files, skipped)
+    candidate_scan_incomplete = any(
+        "/" not in item.split(":", 1)[0]
+        and (item.split(":", 1)[0].lower().endswith(".php") or item.split(":", 1)[0].lower() == "style.css")
+        for item in skipped
+    )
     versions = []
     for item in candidates:
         if "Version" in item["fields"]:
@@ -161,12 +180,19 @@ def identify(source: Path) -> dict:
         path = root / name
         try:
             linked = _linkish(path)
+            if linked:
+                skipped.append(f"{name}: symlink/reparse metadata path")
+                continue
+            if not path.is_file():
+                continue
         except FileNotFoundError:
             continue
-        if linked or not path.is_file():
+        except OSError as exc:
+            skipped.append(f"{name}: version metadata unavailable ({type(exc).__name__})")
             continue
-        content, _ = _read(path)
+        content, reason = _read(path)
         if content is None:
+            skipped.append(f"{name}: version metadata unavailable ({reason})")
             continue
         if name.lower() == "readme.txt":
             match = re.search(r"(?im)^Stable tag:\s*(\S+)", content)
@@ -185,7 +211,7 @@ def identify(source: Path) -> dict:
             except (ValueError, AttributeError):
                 skipped.append(f"{name}: invalid JSON metadata")
     unique = sorted({item["value"] for item in versions})
-    return {"source_root": str(root), "status": "single_candidate" if len(candidates) == 1 and len(unique) <= 1 else "ambiguous" if candidates else "unknown",
+    return {"source_root": str(root), "status": "single_candidate" if len(candidates) == 1 and len(unique) <= 1 and not candidate_scan_incomplete else "ambiguous" if candidates else "unknown",
             "candidates": candidates, "versions": versions, "version_conflict": len(unique) > 1,
             "git": _git(root), "skipped": skipped,
             "note": "Metadata is a source clue, not verified product identity; resolve conflicts against the supplied archive/commit."}
@@ -272,10 +298,19 @@ def inventory(source: Path) -> dict:
 
 
 def _mask_php(text: str) -> str:
-    """Mask comments and quoted strings, preserving length/newlines."""
+    """Mask comments and common quoted/heredoc strings, preserving length/newlines."""
     out = list(text)
     i = 0
     while i < len(text):
+        heredoc = HEREDOC_OPEN.match(text, i) if text.startswith("<<<", i) else None
+        if heredoc:
+            label = next(value for value in heredoc.groups() if value)
+            closing = re.compile(rf"(?m)^[ \t]*{re.escape(label)}(?=[ \t]*(?:[;,\)\]]|$))").search(text, heredoc.end())
+            end = closing.end() if closing else len(text)
+            for j in range(i, end):
+                if text[j] != "\n": out[j] = " "
+            i = end
+            continue
         pair = text[i:i+2]
         if pair in ("//", "/*") or text[i] == "#":
             end = text.find("\n", i) if pair != "/*" else text.find("*/", i + 2)
@@ -283,7 +318,7 @@ def _mask_php(text: str) -> str:
             for j in range(i, end):
                 if text[j] != "\n": out[j] = " "
             i = end
-        elif text[i] in ("'", '"'):
+        elif text[i] in ("'", '"', "`"):
             quote = text[i]
             j = i + 1
             while j < len(text):
@@ -337,10 +372,32 @@ def _callback(value: str) -> str | None:
 
 
 def _setting(settings: str, key: str) -> str | None:
-    found = re.search(r"['\"]" + key + r"['\"]\s*=>\s*(\[[^\]]*\]|array\([^\)]*\)|[^,\]\)]+)", settings, re.S)
-    if not found: return None
-    raw = found.group(1).strip()
-    return _literal(raw) or _callback(raw)
+    settings = settings.strip()
+    if settings.startswith("[") and settings.endswith("]"):
+        body = settings[1:-1]
+    elif settings.startswith("array(") and settings.endswith(")"):
+        body = settings[6:-1]
+    else:
+        return None
+    mask = _mask_php(body)
+    starts = [0]
+    round_depth = square_depth = curly_depth = 0
+    for pos, char in enumerate(mask):
+        if char == "(": round_depth += 1
+        elif char == ")": round_depth -= 1
+        elif char == "[": square_depth += 1
+        elif char == "]": square_depth -= 1
+        elif char == "{": curly_depth += 1
+        elif char == "}": curly_depth -= 1
+        elif char == "," and round_depth == square_depth == curly_depth == 0:
+            starts.append(pos + 1)
+    starts.append(len(body) + 1)
+    for start, end in zip(starts, starts[1:]):
+        item = body[start:end - 1].strip().rstrip(",").strip()
+        match = re.match(r"(['\"])([A-Za-z_]\w*)\1\s*=>\s*(.*)", item, re.S)
+        if match and match.group(2) == key:
+            return _literal(match.group(3)) or _callback(match.group(3))
+    return None
 
 
 def _classify(function: str, args: list[str]):
@@ -369,6 +426,7 @@ def entrypoints(source: Path) -> dict:
     files, skipped = _walk(root)
     digest, digest_skipped = _digest(files)
     complete = _digest_complete(skipped, digest_skipped)
+    scan_limited = False
     records = []
     pattern = re.compile(r"\b(add_action|add_filter|register_rest_route|add_shortcode|register_block_type|wp_schedule_event|wp_schedule_single_event|as_schedule_single_action|as_schedule_recurring_action|as_schedule_cron_action|as_enqueue_async_action|add_rewrite_endpoint)\s*\(")
     for rel, path, _ in files:
@@ -376,7 +434,11 @@ def entrypoints(source: Path) -> dict:
         content, reason = _read(path)
         if content is None:
             skipped.append(f"{rel}: registration scan unavailable ({reason})")
+            scan_limited = True
             continue
+        if "\ufffd" in content:
+            skipped.append(f"{rel}: UTF-8 replacement; registration scan may be incomplete")
+            scan_limited = True
         mask = _mask_php(content)
         for match in pattern.finditer(mask):
             name = match.group(1)
@@ -404,4 +466,5 @@ def entrypoints(source: Path) -> dict:
             records.append(item)
     records.sort(key=lambda item: (item["category"], item["file"].casefold(), item["line"], item["registration"]))
     return {"source_root": str(root), "source_digest": digest, "digest_complete": complete,
+            "php_text_scan_complete": not scan_limited and _digest_complete(skipped, []),
             "entries": records, "skipped": sorted(skipped + digest_skipped), "limitations": DISCLAIMER}

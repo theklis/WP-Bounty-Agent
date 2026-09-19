@@ -6,7 +6,7 @@ Use only sections relevant to the scope. Fill this in ignored `research/`; do no
 
 - Mode and research question: `<...>`
 - Audit state, last reviewed, and next action: `<...>`
-- Supplied input and source identity: `<original path/type, archive digest or repository ref/dirty state, extracted root, exact version/commit>`
+- Supplied input and source identity: `<original path/type; archive digest or Git commit/branch/dirty state; complete tree digest and completeness for mutable source where feasible; extracted root; exact version/commit>`
 - Source provenance, completeness, and conflicting metadata: `<...>`
 - Target Hunter handoff/lead IDs and verified version match, if any: `<...>`
 - Plugin/theme, dependencies and tested environment: `<...>`

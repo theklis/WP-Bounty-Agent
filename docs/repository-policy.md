@@ -4,7 +4,7 @@
 
 - `docs/` contains stable method and project status.
 - `knowledge/` contains intentionally curated, sourced reference material and reviewed lessons. Dated bounty/CVE intelligence belongs here, separate from stable method.
-- `playbooks/` will contain focused specialist procedures, indexed by topic.
+- `playbooks/` contains focused specialist procedures, indexed by topic.
 - `templates/` defines record shapes; filled target records belong under `research/`.
 - `research/` holds local target sources, archives, notes, candidate findings, benchmark runs, and raw feedback. Its contents are ignored except for its README.
 
