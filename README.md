@@ -1,28 +1,70 @@
 # wp-bounty-agent
 
-`wp-bounty-agent` is the planned foundation for an AI-assisted research partner for legitimate WordPress vulnerability research, with an initial emphasis on potential Wordfence Intelligence bug bounty and CVE-relevant work. It is designed to help an experienced researcher understand plugins, form testable security hypotheses, and prioritize manual verification. It does not declare vulnerabilities on its own.
+**v1.0.0.** The project version is in [VERSION](VERSION).
 
-## Intended workflow
+This repository guides an AI-assisted WordPress vulnerability researcher through public target selection, deep review of locally supplied plugin/theme source, attack-path reasoning, manual validation planning, learning from human outcomes, and blind evaluation of audit quality. It is oriented toward Wordfence bug bounty research, while keeping technical validity separate from current program scope and CVE decisions. The human researcher confirms security claims.
 
-Start with a permitted public source tree or local test target. Understand the plugin's purpose, actors, data objects, and trust boundaries. Map reachable features, trace complete paths through code and state, and write evidence-backed hypotheses with explicit missing proof and ways to falsify them. A human researcher reproduces and assesses impact before any finding becomes **CONFIRMED**. Confirmed and rejected results may later become reviewed, reusable lessons.
+It is not a mass scanner, autonomous exploitation framework, submission bot, or substitute for manual testing. A suspicious API, missing local check, or helper match is not proof of a vulnerability. Research only public source and authorized local environments; do not scan third-party installations.
 
-The [TARGET HUNT workflow](docs/target-hunter/README.md), [Source Audit workflow](docs/source-audit/README.md), [LEARN FROM RESULT workflow](docs/learning-workflow.md), and [blind benchmark workflow](docs/benchmarking.md) are available as Codex-guided methods. [Local helper tooling](tools/README.md) can assist Source Audit navigation. These workflows are not CLI commands. Source understanding and plugin-specific business logic take priority over generic vulnerability checklists. The repository retains inspectable methodology and reviewed knowledge; it does not retrain an AI model.
+## Start here
 
-## Current status
+Open this repository in a fresh Codex session. [AGENTS.md](AGENTS.md) routes the task and sets the evidence and safety rules. State the intended workflow in ordinary language and provide any available scope, source path, target version, and research question. Codex follows the relevant documents through the [documentation map](docs/README.md); the mode names below are guided requests, not commands parsed by the helper CLI.
 
-**Milestones 1–6** provide the foundation, [WordPress knowledge](knowledge/wordpress/README.md), [core audit method](docs/audit-methodology/README.md), [specialist playbooks](playbooks/README.md), [dated program intelligence](knowledge/README.md), and [Target Hunter](docs/target-hunter/README.md). **Milestone 7 — Source Audit** makes the method usable against a supplied local source tree or ZIP, with ignored workspaces and resumable records. **Milestone 8 — Safe Helper Tooling** provides optional local navigation. **Milestone 9 — Human-Grounded Learning** adds reviewed result-to-knowledge curation. **Milestone 10 — Blind Benchmarking** evaluates Source Audit with frozen blind results and separate ground truth. There is no scanner, automated hunter, source-audit engine, benchmark runner, integration, or automatic learning mechanism. See the [roadmap](docs/roadmap.md).
+For a source audit, supply a legitimate local ZIP or source-tree path. The [Source Audit workflow](docs/source-audit/README.md) identifies the exact source and creates ignored local records before analysis. Target source stays read-only. A full audit can be paused and resumed; a QUICK TRIAGE must disclose its narrower coverage. A strong candidate enters a human-validation queue, and only explicit human reproduction makes it **CONFIRMED**.
+
+```text
+understand software → model actors, objects, and trust → map reachable surfaces
+→ derive security invariants → trace data and authority across requests and state
+→ form falsifiable paths → challenge them → queue manual tests
+→ learn from human outcomes → evaluate the method with blind benchmarks
+```
+
+An audit may honestly finish with no vulnerability identified in its reviewed scope. A hunt may find no strong target, a result may support no reusable lesson, and a benchmark may be contaminated or invalid.
+
+## Supported workflows
+
+| Request | What it produces | Where to start |
+| --- | --- | --- |
+| **TARGET HUNT** | Sourced, qualitative shortlist and exact-version audit handoff; never a vulnerability verdict | [Target Hunter](docs/target-hunter/README.md) |
+| **AUDIT** | Software/security model, meaningful surface coverage, traced candidates, counterevidence, and manual test queue | [Source Audit](docs/source-audit/README.md) |
+| **QUICK TRIAGE** | Explicitly partial source review and next audit questions | [Source Audit modes](docs/source-audit/resume-and-output.md) |
+| **DEEP DIVE** | Focused analysis of one feature, boundary, or path | [Source Audit modes](docs/source-audit/resume-and-output.md) |
+| **CHAIN REVIEW** | Evidence for each transition between existing primitives | [Source Audit modes](docs/source-audit/resume-and-output.md) |
+| **SECOND PASS** | Changed attacker perspective and analytical direction, with coverage deltas | [Source Audit modes](docs/source-audit/resume-and-output.md) |
+| **RESUME** | Continuation after source identity and prior record checks | [Source Audit modes](docs/source-audit/resume-and-output.md) |
+| **LEARN FROM RESULT** | Bounded local proposal from a human result or correction; curation needs separate explicit approval | [Learning workflow](docs/learning-workflow.md) |
+| **BENCHMARK** | Normal blind Source Audit, frozen output, then separate ground-truth comparison | [Benchmark workflow](docs/benchmarking.md) |
+
+The [core audit methodology](docs/audit-methodology/README.md) drives source reasoning. Load [WordPress knowledge](knowledge/wordpress/README.md) and [specialist playbooks](playbooks/README.md) selectively for the target's architecture. [Current Wordfence and CVE intelligence](docs/current-intelligence.md) is dated and must be rechecked before consequential decisions.
 
 ## Example requests
 
-TARGET HUNT, local Source Audit, LEARN FROM RESULT, and BENCHMARK requests can be used now as guided workflows. The helper CLI supports only local navigation mechanics:
+These are natural-language examples, not CLI syntax:
 
-- “Find a short list of current Wordfence research targets with architectural theses and explain which deserves audit time first.”
-- “Audit this locally supplied plugin source tree; start by explaining its actors, objects, and trust boundaries.”
-- “Deep dive into the REST endpoints and trace object-level authorization.”
-- “Review these two candidate paths for a multi-request attack chain.”
-- “Record my manual rejection of this hypothesis and propose a general lesson for review.”
-- “Benchmark a prepared historical local source in a fresh blind context, freeze the audit, then compare it with separate ground truth.”
+```text
+TARGET HUNT: Find strong current public/free WordPress plugin targets for Wordfence research. Explain why the first deserves audit time.
 
-## Navigate
+AUDIT research/audits/example/source/plugin. Focus on low-privilege and unauthenticated attack paths; record deferred coverage.
 
-Read the [documentation index](docs/README.md) for the smallest relevant set of instructions. [Knowledge](knowledge/README.md) holds curated reference material; [playbooks](playbooks/README.md) hold specialist methods; [research](research/README.md) is a local, ignored workspace. Repository safety and curation rules are in the [repository policy](docs/repository-policy.md).
+QUICK TRIAGE this local plugin ZIP for its architecture and most consequential entry families; tell me what a full audit would still need.
+
+DEEP DIVE candidate F03. Trace every consumer of its token and look for object re-binding.
+
+CHAIN REVIEW the existing primitives. Test each required authority and state bridge.
+
+SECOND PASS this audit from privileged consumer back to attacker-controlled writer.
+
+RESUME research/audits/example/ after verifying that its source has not changed.
+
+LEARN FROM RESULT F03 was rejected: the final object is re-bound to the authenticated customer. Propose any bounded lesson for review.
+
+BENCHMARK this prepared local target in a separate blind context; freeze the ordinary audit before revealing ground truth.
+```
+
+## Records, tools, and limits
+
+Use [record templates](templates/README.md) in the ignored [research workspace](research/README.md) for audit maps, findings, validation plans, learning proposals, and benchmark runs. Keep private data, target source, generated indexes, and proof artifacts local. [Repository policy](docs/repository-policy.md) governs deliberate curation into tracked knowledge.
+
+The optional [Python helper](tools/README.md) performs conservative ZIP intake and lightweight identity, inventory, and static entry-point navigation. It neither executes target code nor makes security judgments. It may miss dynamic or wrapped registrations; it is not a PHP parser. Runtime behavior may require authorized local testing, source review cannot guarantee discovery, historical advisories may be incomplete, and prior model knowledge can contaminate a purportedly blind benchmark. Program and CVE rules can change.
+
+See the [release QA checklist](docs/release-checklist.md) and [roadmap](docs/roadmap.md) for release status.

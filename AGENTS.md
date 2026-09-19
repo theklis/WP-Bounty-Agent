@@ -6,7 +6,7 @@ This repository is the foundation for an AI-assisted WordPress vulnerability res
 
 1. Read [the documentation index](docs/README.md), then only the documents relevant to the task.
 2. For any target, first explain what the software does, its actors and objects, and its trust assumptions. Then trace attacker capability → reachable entry point → controlled data → transformations → authentication, authorization, ownership, and request integrity where relevant → sensitive action → observable impact. A chain may cross requests, handlers, files, or stored state.
-3. Keep observations, hypotheses, strong candidates, confirmed vulnerabilities, and rejected hypotheses distinct. Use [the finding lifecycle](docs/findings.md) and [evidence model](docs/evidence.md). Only explicit human validation can make a finding **CONFIRMED**.
+3. Keep observations, hypotheses, strong candidates, confirmed vulnerabilities, and rejected hypotheses distinct. Use [the finding lifecycle](docs/findings.md) and [evidence model](docs/evidence.md). Only explicit human validation can make a finding **CONFIRMED**; [helper output](tools/README.md) is navigation, not proof.
 4. Cite exact source locations and versions, name missing evidence, seek counterexamples, and say “unproven” when the chain is incomplete. Never turn suspicious code into a vulnerability claim by assertion.
 
 ## Route by task
@@ -15,7 +15,7 @@ This repository is the foundation for an AI-assisted WordPress vulnerability res
 - TARGET HUNT: [Target Hunter](docs/target-hunter/README.md) and [mode definitions](docs/modes.md).
 - AUDIT, DEEP DIVE, CHAIN REVIEW, SECOND PASS, QUICK TRIAGE, or RESUME: [Source Audit workflow](docs/source-audit/README.md), using the [core audit methodology](docs/audit-methodology/README.md). These are guided workflows, not commands.
 - System structure and extension points: [architecture](docs/architecture.md).
-- LEARN FROM RESULT or researcher feedback: [learning workflow](docs/learning-workflow.md) and [knowledge index](knowledge/README.md). Use only relevant curated learning during audits; proposals are not authoritative.
+- LEARN FROM RESULT or researcher feedback: [learning workflow](docs/learning-workflow.md) and [knowledge index](knowledge/README.md). Use only relevant curated learning during audits; proposals are not authoritative and require explicit human approval to become **CURATED**.
 - BENCHMARK: [blind benchmark workflow](docs/benchmarking.md). Freeze the normal audit before revealing ground truth.
 - Current Wordfence scope or CVE relevance: [bounty intelligence](knowledge/bounty/README.md) or [CVE guidance](knowledge/cve/README.md); recheck before consequential decisions.
 - Specialist analysis: [playbook index](playbooks/README.md). Do not load unrelated playbooks.

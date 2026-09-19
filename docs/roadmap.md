@@ -1,6 +1,6 @@
 # Roadmap
 
-Status is about delivered repository capability, not aspiration. Update this file only after verifying the work.
+The project is **v1.0.0** ([VERSION](../VERSION)). Milestones 1–12 are complete. The release exists locally as a Git commit and annotated tag; it has not been pushed or published. Status describes delivered repository capability, not a finding, audit, or learning state.
 
 | Milestone | Scope | Status |
 | --- | --- | --- |
@@ -15,6 +15,6 @@ Status is about delivered repository capability, not aspiration. Update this fil
 | 9 — Learning system | Human-grounded feedback review and curation workflow | Complete |
 | 10 — Benchmarking | Blind Source Audit evaluation and ground-truth comparison | Complete |
 | 11 — Quality hardening | Reliability and method review | Complete |
-| 12 — Version 1 | Integrated research partner | Planned |
+| 12 — Version 1 | Integrated research partner and release entry point | Complete |
 
-Milestones 1–7 establish the foundation, reference knowledge, core audit method, specialist playbooks, dated current intelligence, Target Hunter, and a Codex-guided Source Audit workflow. Milestone 8 adds optional local navigation helpers. Milestone 9 adds human-grounded lesson proposals and review gates. Milestone 10 adds a blind benchmark and comparison workflow; no benchmark runner, autonomous learning, or model retraining is included. Milestone 11 hardens source identity, helper uncertainty, read-only output boundaries, and benchmark/learning consistency.
+Milestones 1–7 establish the foundation, reference knowledge, audit method, playbooks, dated intelligence, Target Hunter, and Source Audit. Milestone 8 adds optional navigation helpers; Milestone 9 adds human-grounded learning; Milestone 10 adds blind benchmarking; Milestone 11 hardens identity and safety boundaries. Milestone 12 integrates these as the v1 guided research system. See the [README](../README.md) for use and the [release checklist](release-checklist.md) for release verification. There is no autonomous scanner, benchmark runner, or model retraining.

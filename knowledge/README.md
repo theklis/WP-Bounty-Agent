@@ -4,9 +4,9 @@ This area is for reviewed, reusable material, not raw target notes. Start with t
 
 | Area | Purpose | Current state |
 | --- | --- | --- |
-| [WordPress](wordpress/README.md) | Security-relevant platform semantics and selective topic routing | Milestone 2 reference |
-| [Bounty intelligence](bounty/README.md) | Dated Wordfence rules and provisional eligibility assessment | Milestone 5 snapshot; recheck before use |
-| [CVE guidance](cve/README.md) | Dated CVE Program rules, relevance, and CNA scope checks | Milestone 5 snapshot; recheck before use |
+| [WordPress](wordpress/README.md) | Security-relevant platform semantics and selective topic routing | Sourced reference; verify version-dependent behavior |
+| [Bounty intelligence](bounty/README.md) | Dated Wordfence rules and provisional eligibility assessment | Dated snapshot; recheck before use |
+| [CVE guidance](cve/README.md) | Dated CVE Program rules, relevance, and CNA scope checks | Dated snapshot; recheck before use |
 | [Historical cases](cases/README.md) | Sanitized, outcome-grounded paths and later benchmark cases | Curated records only; no case published yet |
 | [Research patterns](patterns/README.md) | Bounded, falsifiable cross-target research patterns | Curated records only; no pattern published yet |
 | [Lessons](lessons/README.md) | Outcome-derived operational research guidance | Curated records only; no lesson published yet |

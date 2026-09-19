@@ -1,6 +1,6 @@
 # Operating modes
 
-TARGET HUNT, source-review modes, LEARN FROM RESULT, and BENCHMARK are supported Codex-guided workflows, not implemented commands. Each mode must respect [research principles](research-principles.md), [the evidence model](evidence.md), and human validation.
+TARGET HUNT, source-review modes, LEARN FROM RESULT, and BENCHMARK are supported natural-language Codex workflows, not CLI subcommands. Each mode must respect [research principles](research-principles.md), [the evidence model](evidence.md), and human validation.
 
 Before a substantial mode task, establish its working state internally: mode; target/plugin and version or commit where applicable; authorized scope; local research workspace; relevant documentation/playbooks loaded; and important unresolved assumptions. Keep this in session context or a local journal as useful. It does not require a verbose user-facing preflight or automation.
 

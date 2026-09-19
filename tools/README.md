@@ -2,6 +2,8 @@
 
 `wp_audit_helper.py` is an optional Python 3 standard-library helper for repetitive local [Source Audit](../docs/source-audit/README.md) mechanics. Codex may call its functions or CLI internally; researchers need not memorize commands. It reads target source and never executes PHP or contacts a site.
 
+The helper reports its own version (`python tools/wp_audit_helper.py --version`), separate from the repository's [project version](../VERSION). Its output remains navigation data for the guided audit.
+
 ```text
 python tools/wp_audit_helper.py --format json inspect-zip path/to/plugin.zip
 python tools/wp_audit_helper.py extract-zip path/to/plugin.zip research/audits/my-audit

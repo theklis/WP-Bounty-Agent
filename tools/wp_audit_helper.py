@@ -12,7 +12,7 @@ from source_nav import entrypoints, identify, inventory
 from zip_intake import Limits, ZipSafetyError, extract_zip, inspect_zip
 
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 SCHEMA = 1
 
 

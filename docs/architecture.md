@@ -20,4 +20,6 @@ Authorized target or sourced program record → local research record → eviden
 
 A finding can represent a sequence of requests and state changes. Its model identifies actors, objects, entry points, transitions, authorization decisions, and resulting impact. Selected specialist playbooks enrich that model without redefining the lifecycle or asserting confirmation.
 
+[Blind benchmarking](benchmarking.md) is a separate evaluation path: ordinary Source Audit → frozen blind result → withheld ground truth revealed → comparison → human-reviewed learning proposal. Comparison does not rewrite the blind audit or automatically curate a lesson.
+
 Current bounty terms, installation thresholds, and CVE guidance can change. Store such facts in dated, sourced records under the appropriate `knowledge/` area and recheck them before use. Stable research principles remain in `docs/`.
