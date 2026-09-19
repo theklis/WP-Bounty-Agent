@@ -17,6 +17,7 @@ Read only what the current task requires. These documents define stable project 
 | Freshness, conflicts, and use of changing program/CVE rules | [Current intelligence](current-intelligence.md) |
 | Learning principles and durable knowledge | [Learning model](learning.md) |
 | Researcher outcome, correction, miss, or lesson review | [LEARN FROM RESULT workflow](learning-workflow.md) |
+| Blind historical Source Audit evaluation and ground-truth comparison | [Benchmark workflow](benchmarking.md) |
 | File placement and safe Git use | [Repository policy](repository-policy.md) |
 | Delivery status | [Roadmap](roadmap.md) |
 

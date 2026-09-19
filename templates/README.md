@@ -8,6 +8,9 @@ Copy these into the ignored local `research/` workspace when needed. They define
 - [Research journal](journal.md): dated audit decisions, dead ends, and coverage.
 - [Lesson](lesson.md): local result, provenance, bounded proposal, and review state.
 - [Case](case.md): sanitized educational path and human outcome for deliberate curation.
+- [Benchmark manifest](benchmark-manifest.md): coordinator-only case setup, blind handoff, run identity, and contamination state.
+- [Benchmark ground truth](benchmark-truth.md): withheld path, premise quality, and source provenance.
+- [Benchmark comparison](benchmark.md): post-freeze reasoning, false-positive, coverage, and learning analysis.
 - [Current intelligence](intelligence-record.md): dated program or CVE facts.
 - [Wordfence scope assessment](wordfence-scope-assessment.md): provisional finding-specific program screen.
 - [CVE relevance assessment](cve-relevance-assessment.md): preliminary CVE and CNA questions.
