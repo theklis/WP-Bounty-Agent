@@ -4,7 +4,7 @@ Copy these into the ignored local `research/` workspace when needed. They define
 
 - [Finding](finding.md): status, chain, evidence, uncertainty, human validation.
 - [Audit record](audit-record.md): security model, surfaces, boundaries, state, coverage, second pass, and summary.
-- [Validation plan](validation-plan.md): focused local test for a strong candidate.
+- [Validation plan](validation-plan.md): feature primer and checkpointed local walkthrough for a strong candidate under [VALIDATE](../docs/source-audit/manual-validation.md).
 - [Research journal](journal.md): dated audit decisions, dead ends, and coverage.
 - [Lesson](lesson.md): local result, provenance, bounded proposal, and review state.
 - [Case](case.md): sanitized educational path and human outcome for deliberate curation.

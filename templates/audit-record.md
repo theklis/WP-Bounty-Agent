@@ -55,11 +55,11 @@ Link cross-file or cross-request paths and finding IDs here. For each necessary 
 
 ## Candidate and validation queue
 
-Link distinct [finding records](finding.md); group routes with the same root issue. This table is a resume and testing queue, not a second evidence ledger.
+Link distinct [finding records](finding.md); group routes with the same root issue. This table is a concise researcher handoff and resume queue, not a second evidence ledger. Link each strong candidate's [validation plan](validation-plan.md), including any exact setup fact still needed and how to resolve it; detailed steps are available through `VALIDATE <ID>`.
 
-| Finding ID / status | Confidence, priority, and reason | Weakest unresolved premise | Next human verification / plan |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Finding ID / status | Feature, actor, and why interesting | Confidence / priority; why test first | First discriminating premise / main uncertainty | Setup difficulty / effort; plan or missing fact |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## Second pass and final research summary
 

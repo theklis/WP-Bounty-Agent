@@ -11,9 +11,10 @@ Before a substantial mode task, establish its working state internally: mode; ta
 | **DEEP DIVE** | One component, surface, family, or path → detailed trace, assumptions, counterexamples, and focused tests within the [Source Audit workflow](source-audit/README.md). |
 | **CHAIN REVIEW** | Existing findings and functionality map → potential multi-stage paths across requests, handlers, and stored state, with each transition evidenced in the [Source Audit workflow](source-audit/README.md). |
 | **SECOND PASS** | Prior audit plus changed attacker assumptions → explicit search for missed surfaces and documented coverage deltas through the [Source Audit workflow](source-audit/README.md). |
+| **VALIDATE** | Existing audit, finding ID, and validation plan → [checkpointed manual walkthrough](source-audit/manual-validation.md) for the researcher. Explain the feature and test one necessary premise at a time; status changes require the researcher's observed evidence. |
 | **BENCHMARK** | Prepared historical or synthetic local target → ordinary [Source Audit](source-audit/README.md) in a blind context → frozen result → separate [ground-truth comparison](benchmarking.md). A known-answer rerun is regression, not clean discovery. |
 | **LEARN FROM RESULT** | Human result, correction, or known audit miss → local outcome and provenance-bearing **PROPOSED** lesson under the [learning workflow](learning-workflow.md). Explicit human review and approval are required before curation. |
 
 Modes may share records and specialist playbooks. They must not silently change a finding to **CONFIRMED**, promote a proposal to **CURATED**, treat benchmark ground truth as blind audit input, or treat program eligibility as permanently known.
 
-QUICK TRIAGE and RESUME are [Source Audit entry intents](source-audit/resume-and-output.md), not new finding statuses. AUDIT, DEEP DIVE, CHAIN REVIEW, and SECOND PASS use the [core audit methodology](audit-methodology/README.md) through that operational workflow.
+QUICK TRIAGE, RESUME, and VALIDATE are [Source Audit entry intents](source-audit/resume-and-output.md), not new finding statuses. AUDIT, DEEP DIVE, CHAIN REVIEW, and SECOND PASS use the [core audit methodology](audit-methodology/README.md) through that operational workflow.

@@ -1,6 +1,6 @@
 # wp-bounty-agent
 
-**v1.0.0.** The project version is in [VERSION](VERSION).
+**v1.1.0.** The project version is in [VERSION](VERSION).
 
 This repository guides an AI-assisted WordPress vulnerability researcher through public target selection, deep review of locally supplied plugin/theme source, attack-path reasoning, manual validation planning, learning from human outcomes, and blind evaluation of audit quality. It is oriented toward Wordfence bug bounty research, while keeping technical validity separate from current program scope and CVE decisions. The human researcher confirms security claims.
 
@@ -32,6 +32,7 @@ An audit may honestly finish with no vulnerability identified in its reviewed sc
 | **CHAIN REVIEW** | Evidence for each transition between existing primitives | [Source Audit modes](docs/source-audit/resume-and-output.md) |
 | **SECOND PASS** | Changed attacker perspective and analytical direction, with coverage deltas | [Source Audit modes](docs/source-audit/resume-and-output.md) |
 | **RESUME** | Continuation after source identity and prior record checks | [Source Audit modes](docs/source-audit/resume-and-output.md) |
+| **VALIDATE** | Plain-English, checkpointed manual walkthrough for an existing candidate; the researcher supplies observed results | [Manual validation](docs/source-audit/manual-validation.md) |
 | **LEARN FROM RESULT** | Bounded local proposal from a human result or correction; curation needs separate explicit approval | [Learning workflow](docs/learning-workflow.md) |
 | **BENCHMARK** | Normal blind Source Audit, frozen output, then separate ground-truth comparison | [Benchmark workflow](docs/benchmarking.md) |
 
@@ -55,6 +56,8 @@ CHAIN REVIEW the existing primitives. Test each required authority and state bri
 SECOND PASS this audit from privileged consumer back to attacker-controlled writer.
 
 RESUME research/audits/example/ after verifying that its source has not changed.
+
+VALIDATE F03. Explain the plugin feature, then walk me through the first local test checkpoint.
 
 LEARN FROM RESULT F03 was rejected: the final object is re-bound to the authenticated customer. Propose any bounded lesson for review.
 
