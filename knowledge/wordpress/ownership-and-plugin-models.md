@@ -1,0 +1,17 @@
+# Object ownership, plugin security models, and multisite
+
+## The specific object matters
+
+Authentication says who acts; a capability may permit a class of actions; object authorization asks whether **this actor** may perform **this action on this object**. A customer may read their own order but not another customer's. A post author, media uploader, booking staff member, form owner, tenant member, or API-key owner may each have different rights. An integer ID is a locator, not permission. An opaque ID may reduce guessing but is still not automatically an authorization secret. When an ID comes from a route, form, option, meta record, or prior handler, resolve the real object and recheck its current owner/site/tenant relationship at the point of use. Core's object-aware meta capabilities illustrate the distinction, but plugins often need their own relationship check. [Sources: `user_can()` with object ID](https://developer.wordpress.org/reference/functions/user_can/), [`map_meta_cap()`](https://developer.wordpress.org/reference/functions/map_meta_cap/).
+
+For each operation, record actor → action → object → relationship → check → state/read result. Compare create, read, update, delete, export, and sharing paths; one handler's check does not cover another handler. If an object changes owner or status between requests, trace whether earlier authorization is re-used incorrectly. A nonce or known object ID is not an ownership check. See [nonces and tokens](nonces-and-tokens.md).
+
+## Plugin-created authority
+
+WordPress roles may be only part of the model. A plugin can define staff, vendors, agents, managers, tenants, project members, API clients, secret links, invitations, and custom sessions. Start an audit by mapping actors, objects, relationships, tokens, and allowed state transitions from actual functionality. Then locate where those relationships are stored and enforced, including callbacks invoked indirectly. Do not assume that a core role or capability settles a plugin-specific rule. This is a research model, not a claim about every plugin; evaluate the target's implementation. [Framework context: hooks](https://developer.wordpress.org/plugins/hooks/), [roles](https://developer.wordpress.org/plugins/users/roles-and-capabilities/), [metadata](https://developer.wordpress.org/reference/functions/update_post_meta/).
+
+## Multisite boundary
+
+On multisite, distinguish a site's administrator from a network super admin and site options from network-wide options. A user and capability check must be interpreted for the correct site. `current_user_can_for_site()` explicitly checks a capability for a chosen site; `get_site_option()`/`update_site_option()` concern network-level settings in multisite. A plugin using a global-looking key or the current site implicitly may cross tenants. Core and configuration details vary; verify the installed version and site context before concluding a bypass. [Sources: multisite administration](https://developer.wordpress.org/advanced-administration/multisite/administration/), [`current_user_can_for_site()`](https://developer.wordpress.org/reference/functions/current_user_can_for_site/), [options API](https://developer.wordpress.org/apis/options/).
+
+**Trace next:** who selected the object or site ID; where membership/ownership was looked up; whether a check can be invalidated by later substitution, status change, or background processing; and what data/action crosses the boundary.
